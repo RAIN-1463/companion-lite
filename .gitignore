@@ -1,0 +1,11 @@
+﻿data/
+*.db
+*.db-wal
+*.db-shm
+backups/
+logs/
+.venv/
+__pycache__/
+*.pyc
+*.exe
+.github-token.txt
