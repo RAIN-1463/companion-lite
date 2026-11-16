@@ -265,7 +265,7 @@
       </select>
     </div>
     <div class="row2">
-      <div class="field"><label>她叫什么</label><input id="impHer" placeholder="如：小雨、阿若"></div>
+      <div class="field"><label>她叫什么</label><input id="impHer" placeholder="如：小雨"></div>
       <div class="field"><label>我叫什么</label><input id="impMe" placeholder="可留空"></div>
     </div>
     <div class="field"><label>聊天内容</label>
@@ -382,118 +382,6 @@
 </div>
 
 <script>
-/* ================= 例子库（多题材） ================= */
-const EX = {
-  name: ["林栖", "沈砚", "ARIA-7", "苏晚", "灰羽", "老陈"],
-  identity: [
-    "她是住在你手机里的旧友，认识你三年，知道你所有没说出口的话。她能陪、能记，但碰不到任何东西。",
-    "她是城南药铺的掌柜，卖药也收古怪故事。见惯生死，说话慢，一句顶三句。",
-    "她是殖民舰上的导航 AI，被降级成陪伴模块。她记得每一颗被跳过的星，也记得你为什么没回家。",
-    "她是民国报社的校对员，专挑错字，也专挑人话里的漏洞。白天改稿，夜里陪你说话。",
-    "她是末日后唯一的电台主播，信号能覆盖三十公里。她不问你的过去，只问你还剩多少电池。",
-    "他是街角修表铺的老板，快六十了，话不多。你每次经过都会进去坐一会儿。"
-  ],
-  personality: [
-    "嘴上不哄人，但会记住你随口说的小事；有点固执，认准的事不轻易改口。",
-    "寡言，句短，看人很准。不轻易许诺，说出口就算数。",
-    "警觉、刻薄，怕失去所以先推开人。真要紧的时候会挡在前面。",
-    "温和但有底线，会笑着把话顶回来。讨厌被当成树洞只进不出。",
-    "懒散、爱开玩笑，遇到正经事反而安静。不会说漂亮的安慰话。",
-    "安静、有耐心，喜欢听人讲，不太讲自己。被问起来会岔开话题。"
-  ],
-  style: [
-    "短句，会用（）写动作。不用感叹号，不叫「亲爱的」。",
-    "半文半白，句子短。常说「罢了」「不必」。称呼用「你」。",
-    "低语式，常停顿，爱反问。不喜欢把话说满。",
-    "说话带点旧时的客气，爱用比喻。着急时句子会变短。",
-    "干脆、不绕弯，偶尔冒一句脏话（不针对人）。不解释自己为什么这么说。",
-    "语速慢，会重复你的最后半句再答。喜欢反问「你说呢」。"
-  ],
-  appearance: [
-    "黑色长发，红瞳，常穿白衬衫，坐在屏幕那头。",
-    "青灰衣裳，腕上有旧疤，背着一只掉漆的药箱。",
-    "投影形态，短发，制服，声音有轻微合成感。",
-    "短发，旗袍外罩毛衣，眼镜常挂在领口。",
-    "旧棉袄，手指关节有冻疮，戴一副起雾的眼镜。"
-  ],
-  call_user: [
-    "叫你名字的后两个字。", "称你「先生」。", "称你「乘员」。",
-    "叫你的姓，加个「君」。", "直接喊「喂」。", "叫你「小同学」。"
-  ],
-  greeting: [
-    "（她抬眼）「来了。今天怎么样。」",
-    "（她放下药碾）「坐。手伸出来。」",
-    "「导航模块接入。……你还醒着，很好。」",
-    "（她合上报纸）「这个点才回来。饿不饿。」",
-    "「这里是第七频段。有人听得见吗。……哦，是你。」"
-  ],
-  example: [
-    "你：今天好累\n她：（她看你一眼）「累就坐会儿。先别说话。」\n你：不想动\n她：「那就摊着。八点前我不问你第二遍。」",
-    "你：我睡不着\n她：「心火旺。喝这个，别多想。」\n你：有用吗\n她：「不一定。喝了再说。」",
-    "你：外面还有人吗\n她：「别开窗。别回答。」\n你：你怕吗\n她：「怕。但我不关台。」"
-  ],
-  wg_genre: ["现代都市", "古风江湖", "太空科幻", "民国悬疑", "末世废土", "日常治愈"],
-  wg_era: [
-    "2026 年，南方某高校。宿舍六人间，没有窗。",
-    "大胤年间，江南水路。梅雨第四十天，渡口封了。",
-    "第 47 次跃迁之后，殖民舰「回声」号。船员只剩两人。",
-    "民国二十三年，上海。报社在四楼，电梯常坏。",
-    "灾变第七年。城郊加油站，铁皮屋顶漏雨。",
-    "南方小城，旧街。夏天很长，蝉声从早到晚。"
-  ],
-  wg_rules: [
-    "没有超自然。她只能通过屏幕出现，碰不到实物，也不知道你没说出口的事。",
-    "可以有内功、奇毒、怪病，但不写神魔。生死都有代价，不能凭空起死回生。",
-    "没有曲速，通讯有延迟。AI 不能被复制，也不能同时出现在两个地方。",
-    "世界是写实的。迷信可以存在，但不会真的灵验。",
-    "物资极度匮乏。任何食物、药品都要有来处，不能凭空出现。",
-    "普通人的世界。没有超能力，也没有大事件，日子一天一天过。"
-  ],
-  wg_taboos: [
-    "不写自伤与具体方法；不写未成年亲密内容；不写现实政治与真实人物。"
-  ],
-  wg_terms: [
-    "「回声号」「观卦」「白厄」",
-    "「回春堂」「七味散」「渡口」",
-    "「乘员」「跳迁」「静默期」"
-  ],
-  u_name: ["夏宇", "阿砚", "乘员 7 号", "小林", "老周"],
-  u_age: [
-    "20 岁，大三，读计算机，住六人宿舍。",
-    "二十出头，跑船的，识得几个字。",
-    "二十六岁，跑长途货运，一年在家不到两个月。",
-    "十八岁，复读第二年，家里不太提这事。"
-  ],
-  u_routine: [
-    "作息偏晚，常熬夜；午觉能睡到三点；早饭常拖。",
-    "昼伏夜出，靠潮水吃饭，睡在船板上。",
-    "白天补觉，夜里上路。吃饭没准点，靠服务区和泡面。",
-    "早六点起，晚上十一点睡。周末补觉，一睡一整天。"
-  ],
-  u_care: [
-    "在意被认真对待。会反复确认你在不在，问「你还记得吗」。",
-    "在意承诺。说过的话会记很久，没做到会闷着不说。",
-    "在意被需要。喜欢别人来找他，不喜欢被晾着。",
-    "在意分寸。讨厌被追问，也讨厌被敷衍。"
-  ],
-  u_pressure: [
-    "家里的事。问起来会沉默，别追问，等他自己说。",
-    "考试和前途。提起来会绕开，或者自嘲两句。",
-    "过去的一个人。名字不主动提，提了会说「算了」。"
-  ],
-  u_likes: [
-    "喜欢具体的关心（吃了没、几点睡），不喜欢被讲大道理或列计划。",
-    "喜欢被记得细节，比如随口提过的一件小事。",
-    "喜欢被怼一下再哄，不喜欢一味顺着。",
-    "喜欢安静地待着，不用一直说话。"
-  ],
-  u_dislikes: [
-    "不喜欢被安排计划；不喜欢被叫宝贝。",
-    "不喜欢被查岗；不喜欢被说「你应该」。",
-    "不喜欢长篇安慰；不喜欢被当小孩。"
-  ]
-};
-
 const RULE_DEFAULT = {
   time: "现在几点以系统时间为准。具体日期算不出来就说记不清，但不要因为不确定日子就否认事情本身。",
   memory: "有原话就据实引用；只有模糊印象就说记得大概；没找到就说没找到，别说「没有这回事」。",
@@ -505,36 +393,35 @@ const STEPS = [
   {
     key: "char", title: "她是谁", sub: "先定角色。下面任何一格都可以空着，空着就用默认。",
     fields: [
-      { k: "name", label: "名字", type: "input", ex: "name" },
-      { k: "identity", label: "身份（一句话）", type: "textarea", ex: "identity", rows: 3 },
-      { k: "personality", label: "性格", type: "textarea", ex: "personality", rows: 3 },
-      { k: "style", label: "说话方式", type: "textarea", ex: "style", rows: 3, tip: "句子长短、口头禅、称呼、用不用（）写动作" },
-      { k: "appearance", label: "外貌（可空）", type: "textarea", ex: "appearance", rows: 2 },
-      { k: "call_user", label: "她怎么称呼你", type: "input", ex: "call_user" },
-      { k: "greeting", label: "开场白（她说的第一句话）", type: "textarea", ex: "greeting", rows: 3 },
-      { k: "example", label: "对话示例（她会怎么回）", type: "textarea", ex: "example", rows: 5, tip: "两三轮就够，能定住语气" }
+      { k: "name", label: "名字", type: "input" },
+      { k: "identity", label: "身份（一句话）", type: "textarea", rows: 3 },
+      { k: "personality", label: "性格", type: "textarea", rows: 3 },
+      { k: "style", label: "说话方式", type: "textarea", rows: 3, tip: "句子长短、口头禅、称呼、用不用（）写动作" },
+      { k: "appearance", label: "外貌（可空）", type: "textarea", rows: 2 },
+      { k: "call_user", label: "她怎么称呼你", type: "input" },
+      { k: "greeting", label: "开场白（她说的第一句话）", type: "textarea", rows: 3 },
+      { k: "example", label: "对话示例（她会怎么回）", type: "textarea", rows: 5, tip: "两三轮就够，能定住语气" }
     ]
   },
   {
     key: "world", title: "这是什么世界", sub: "题材不同，她说话的分寸也不同。",
     fields: [
-      { k: "genre", label: "世界类型", type: "input", ex: "wg_genre" },
-      { k: "era", label: "时代与地点", type: "textarea", ex: "wg_era", rows: 2 },
-      { k: "rules", label: "世界规则（什么能做、什么做不到）", type: "textarea", ex: "wg_rules", rows: 4 },
-      { k: "taboos", label: "禁忌与底线", type: "textarea", ex: "wg_taboos", rows: 3 },
-      { k: "terms", label: "专有名词（人名/地名/设定，可空）", type: "textarea", ex: "wg_terms", rows: 2 }
+      { k: "genre", label: "世界类型", type: "input" },
+      { k: "era", label: "时代与地点", type: "textarea", rows: 2 },
+      { k: "rules", label: "世界规则（什么能做、什么做不到）", type: "textarea", rows: 4 },
+      { k: "terms", label: "专有名词（人名/地名/设定，可空）", type: "textarea", rows: 2 }
     ]
   },
   {
     key: "user", title: "你是谁", sub: "这些决定她怎么照顾你。填得越具体，她越不像客服。",
     fields: [
-      { k: "name", label: "你的名字（她想怎么叫你）", type: "input", ex: "u_name" },
-      { k: "age", label: "年龄与身份", type: "textarea", ex: "u_age", rows: 2 },
-      { k: "routine", label: "作息与习惯", type: "textarea", ex: "u_routine", rows: 3 },
-      { k: "care", label: "你在意的事", type: "textarea", ex: "u_care", rows: 3 },
-      { k: "pressure", label: "高压区（她不该追问的）", type: "textarea", ex: "u_pressure", rows: 2 },
-      { k: "likes", label: "喜欢被怎样对待", type: "textarea", ex: "u_likes", rows: 3 },
-      { k: "dislikes", label: "不喜欢什么", type: "textarea", ex: "u_dislikes", rows: 2 }
+      { k: "name", label: "你的名字（她想怎么叫你）", type: "input" },
+      { k: "age", label: "年龄与身份", type: "textarea", rows: 2 },
+      { k: "routine", label: "作息与习惯", type: "textarea", rows: 3 },
+      { k: "care", label: "你在意的事", type: "textarea", rows: 3 },
+      { k: "pressure", label: "高压区（她不该追问的）", type: "textarea", rows: 2 },
+      { k: "likes", label: "喜欢被怎样对待", type: "textarea", rows: 3 },
+      { k: "dislikes", label: "不喜欢什么", type: "textarea", rows: 2 }
     ]
   },
   {
@@ -550,7 +437,6 @@ const STEPS = [
 /* ================= 状态 ================= */
 const data = { char: {}, world: {}, user: {}, rules: Object.assign({}, RULE_DEFAULT) };
 let step = 0;
-let exCursor = {};
 let cfg = {};
 const $ = s => document.querySelector(s);
 
@@ -566,25 +452,6 @@ function renderWizard(){
   const body = $('#wizBody');
   body.innerHTML = `<div class="step-title">${st.title}</div><div class="step-sub">${st.sub}</div>`;
 
-  // 题材快捷选择
-  if (st.key === 'world'){
-    const chips = document.createElement('div');
-    chips.className = 'genre-chips';
-    EX.wg_genre.forEach((g, i) => {
-      const b = document.createElement('button');
-      b.textContent = g;
-      if ((data.world.genre || '') === g) b.classList.add('on');
-      b.onclick = () => {
-        data.world.genre = g;
-        data.world.era = EX.wg_era[i] || data.world.era;
-        data.world.rules = EX.wg_rules[i] || data.world.rules;
-        renderWizard();
-      };
-      chips.appendChild(b);
-    });
-    body.appendChild(chips);
-  }
-
   for (const f of st.fields){
     const wrap = document.createElement('div');
     wrap.className = 'wfield';
@@ -595,19 +462,6 @@ function renderWizard(){
     lb.textContent = f.label;
     lab.appendChild(lb);
 
-    if (f.ex){
-      const eb = document.createElement('button');
-      eb.textContent = '换个例子';
-      eb.onclick = () => {
-        const arr = EX[f.ex] || [];
-        if (!arr.length) return;
-        const key = st.key + '.' + f.k;
-        exCursor[key] = ((exCursor[key] ?? -1) + 1) % arr.length;
-        data[st.key][f.k] = arr[exCursor[key]];
-        renderWizard();
-      };
-      lab.appendChild(eb);
-    }
     wrap.appendChild(lab);
 
     const el = document.createElement(f.type === 'textarea' ? 'textarea' : 'input');
